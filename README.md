@@ -1,20 +1,23 @@
 # Introduction
+<<<<<<< HEAD
+=======
 ## Changelog
 - 30/03/2023 Update unpaid invoice from date to create date, so every invoice generate its will send to customer. important update !
 - 06/08/2023 Add new ticket & reply ticket notification to whatsapp client
 
+>>>>>>> 651f72c1c191cf9f40f85b089829f0a5f5707f25
 ## Features
 - [OK] API Kirim Pesan ke Nomor
 - [OK] Auto Response / BOT
-- [OK] WHMCS Billing Alert
+- [OK] Blesta Billing Alert
     - Invoice Terbit
     - Invoice Paid
     - Invoice DueDate
     - Last Notification 1day Before Terminate
 
 # Requirements
-- NodeJS V18
-- Python V3
+- NodeJS v18
+- Python v3
 - Pip Python
 
 # Install
@@ -29,14 +32,14 @@
     ```
 - Clone repository and Install Library
     ```
-    git clone git@github.com:Intprism-Technology/Whatsapp-WHMCS.git
-    cd Whatsapp-WHMCS
+    git clone https://github.com/reynaldiarya/WhatsApp-Blesta.git
+    cd WhatsApp-Blesta
     npm install
     npm update
     ```
 - Konfigurasi DB MySQL
     ```
-    nano whmcs/config.py
+    nano blesta/config.py
     ```
     edit baris berikut
     ```
@@ -47,7 +50,7 @@
     ```
 - Konfigurasi template pesan notifikasi WHMCS
     ```
-    nano whmcs/template_message.py
+    nano blesta/template_message.py
     ```
     template variabel
     ```
@@ -67,30 +70,37 @@
     new_ticket = "Halo, *{firstName} {lastName}*
     reply_ticket = "Halo, *{firstName} {lastName}*
     ```
-- Login Whatsapp
-    sebagai contoh, instalasi di path /var/www/Whatsapp-WHMCS
+- Login WhatsApp
+    sebagai contoh, instalasi di path /WhatsApp-Blesta
     ```
-    /usr/local/bin/node /var/www/Whatsapp-WHMCS/index.js
+    node WhatsApp-Blesta/index.js
     ```
     - scan qr hingga muncul success pairing
     - exit program / CTRL + C
 # Run Service
-- Whatsapp BOT & API
+- WhatsApp BOT & API
     - edit cron
     ```
-    @reboot sleep 5 && /usr/local/bin/node /var/www/Whatsapp-WHMCS/index.js &
+    @reboot sleep 5 && node WhatsApp-Blesta/index.js &
     ```
     - jalankan service ulang 
     ```
-    /usr/local/bin/node /var/www/Whatsapp-WHMCS/index.js &
+    node WhatsApp-Blesta/index.js &
     ```
 - Service Kirim Invoice WHMCS Notifikasi (tiap hari, jam 8 pagi) dan notifikasi invoice paid (tiap 5menit)
     ```
+<<<<<<< HEAD
+    */5 * * * * cd WhatsApp-Blesta/whmcs && python3 invoice_paid.py
+    0 8 * * * cd WhatsApp-Blesta/whmcs && python3 invoice_unpaid.py
+    0 8 * * * cd WhatsApp-Blesta/whmcs && python3 invoice_duedate.py
+    0 8 * * * cd WhatsApp-Blesta/whmcs && python3 invoice_comingTerminate.py
+=======
     */5 * * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_paid.py
     0 8 * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_unpaid.py
     0 8 * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_duedate.py
     0 8 * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_comingTerminate.py
     */5 * * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 ticket.py
+>>>>>>> 651f72c1c191cf9f40f85b089829f0a5f5707f25
     ```
 # Endpoint
 - API Endpoint
@@ -107,7 +117,7 @@
 # Request Update
 Warga Diskusiwebhosting bisa request langsung melalui thread ))
 
-    https://www.diskusiwebhosting.com/threads/whatsapp-api-dan-notifikasi-whmcs.38061/
+    https://www.diskusiwebhosting.com/threads/WhatsApp-api-dan-notifikasi-whmcs.38061/
 
 
 # Support Developer

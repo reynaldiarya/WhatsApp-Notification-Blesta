@@ -3,62 +3,35 @@ import datetime
 import requests
 import template_message
 
-urlinvoices = f"{config.url}/invoices/getList.json"
-paramsinvoices = {
-    "status": 'closed',
-    "order_by[date_closed]": "DESC"
-}
-responseinvoices = requests.get(urlinvoices, params=paramsinvoices, auth=(config.user, config.key))
-if responseinvoices.status_code == 200:
-    datainvoices = responseinvoices.json()
-    responseinvoceslist = datainvoices.get('response', [])
+currentDate = datetime.datetime.now()
+currentDate = currentDate.year
 
-    now = datetime.datetime.now()
+access = config.db.cursor()
+access.execute("SELECT * FROM invoices WHERE paid != 0 AND date_closed >= date_sub(now(), interval 5 minute)")
+resultInvoice = access.fetchall()
+for x in resultInvoice:
+    sql = "SELECT * FROM contacts WHERE client_id = %s"
+    access.execute(sql, (x[3],))
+    resultUser = access.fetchall()
+    for user in resultUser:
+        firstName = user[5]
+        lastName = user[6]
+        sql2 = "SELECT * FROM contact_numbers WHERE contact_id = %s"
+        access.execute(sql2, (user[1],))
+        resultContact = access.fetchall()
+        for contact in resultContact:
+            phonetemp = contact[2].replace('.', '').replace('-', '')
+            if phonetemp.startswith('0'):
+                phonetemp = '62' + phonetemp[1:]
+            elif phonetemp.startswith('8'):
+                phonetemp = '62' + phonetemp
+            phone = '+' + phonetemp
+            invoiceNumber = x[2]
+            if invoiceNumber == "":
+                invoiceNumber = x[0]
+            messageToSend = template_message.invoice_paid.format(firstName = firstName,lastName = lastName,phone = phone, invoiceNumber = invoiceNumber, duedate = str(x[4]), duetotal= x[13])
+            url = 'http://127.0.0.1:8080/api/send'
+            data = {'phone': phone, 'message': messageToSend}
+            sendMessage = requests.post(url, json = data)
 
-    for invoice in responseinvoceslist:
-        date_closed_str = invoice.get('date_closed')
-        if date_closed_str:
-            date_closed = datetime.datetime.strptime(date_closed_str, "%Y-%m-%d %H:%M:%S")
-            time_difference = now - date_closed
-            time_difference_minutes = time_difference.total_seconds() / 60
-
-            if 0 <= time_difference_minutes <= 5:
-                urlcontact = f"{config.url}/contacts/getAll.json"
-                paramscontact = {
-                    "client_id": invoice.get('client_id')
-                }
-                responsecontact = requests.get(urlcontact, params=paramscontact, auth=(config.user, config.key))
-                datacontact = responsecontact.json()
-                responsecontactlist = datacontact.get('response', [])
-
-                for contact in responsecontactlist:
-                    urlcontactnumber = f"{config.url}/contacts/getNumbers.json"
-                    paramscontactnumber = {
-                        "contact_id": contact.get('id')
-                    }
-                    responsecontactnumber = requests.get(urlcontactnumber, params=paramscontactnumber, auth=(config.user, config.key))
-                    datacontactnumber = responsecontactnumber.json()
-                    responsecontactnumberlist = datacontactnumber.get('response', [])
-                    for contactnumber in responsecontactnumberlist:
-                        firstName = contact.get('first_name')
-                        lastName = contact.get('last_name')
-                        phonetemp = contactnumber.get('number').replace('+', '').replace('.', '').replace('-', '')
-                        if phonetemp.startswith('0'):
-                            phonetemp = '62' + phonetemp[1:]
-                        elif phonetemp.startswith('8'):
-                            phonetemp = '62' + phonetemp
-                        phone = '+' + phonetemp
-                        invoiceNumber = invoice.get('id_value')
-                        if invoiceNumber == "":
-                            invoiceNumber = invoice.get('id')
-                        totaltemp = float(invoice.get('total'))
-                        total = "{:,.0f}".format(totaltemp).replace(",", ".")
-                        messageToSend = template_message.invoice_paid.format(firstName = firstName,lastName = lastName,phone = phone, invoiceNumber = invoiceNumber, duedate = str(invoice.get('date_due')), duetotal= total)
-                        url = 'http://127.0.0.1:8080/api/send'
-                        data = {'phone': phone, 'message': messageToSend}
-                        sendMessage = requests.post(url, json = data)
-
-                        print(sendMessage.text)
-
-else:
-    print("Gagal mendapatkan data:", responseinvoices.status_code)
+            print(sendMessage.text)
