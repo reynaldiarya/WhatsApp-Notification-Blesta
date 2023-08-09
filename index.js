@@ -70,16 +70,13 @@ client.on('message', async message => {
     if (message.body.toLowerCase() === 'menu') {
         // Membalas Pesan
         currentChatLocation = 'menu';
-        message.reply('=== MENU UTAMA ===\n\nUntuk memilih menu, ketik angka yang tersedia dalam pilihan menu !\n1. Apa itu *Intprism* dan *Computing ID* ?\n2. Layanan apa saja yang disediakan?')
+        message.reply('=== MENU UTAMA ===\n\nUntuk memilih menu, ketik angka yang tersedia dalam pilihan menu !1. Daftar Layanan Hexahost')
     }
     if (currentChatLocation == 'menu') {
         if (message.body.toLocaleLowerCase() === '1'){
-            message.reply('*PT Intprism Computing Technology* memiliki beberapa brand yakni: *Intprism* dan *Computing ID*\n\n *Intprism* fokus memberikan layanan sistem informasi kepada kamu untuk membuat aplikasi berbasis web maupun mobile termasuk android dan IOS.\n\n*Computing ID* fokus memberikan layanan insfratruktur kepada kamu yang membutuhkan layanan terkait server dan sejenisnya antara lain: Hosting, Domain, Cloud Server, Colocation Server, Internet of Things dan Interconnection.\n\n\nPosisi kamu sekarang ada di: '+currentChatLocation+' ketik *Menu* untuk kembali ke menu utama');
+            message.reply('Layanan yang kami berikan yakni:\n- Hosting\n- Domain\n- Pembuatan Website\n- Optimasi PageSpeed WordPress\n- Expired Domain.\n\n\nPosisi kamu sekarang ada di: '+currentChatLocation+' ketik *Menu* untuk kembali ke menu utama');
         }
-        if (message.body.toLocaleLowerCase() === '2'){
-            message.reply('Layanan yang kami berikan yakni:\n\n*Intprism*\n- Sistem informasi custom\n- Aplikasi berbasis\n- Aplikasi mobile android\n- Aplikasi mobile IOS.\n\n*Computing ID* \n- Hosting cPanel\n- Domain\n- Cloud Server\n- Colocation Server\n- Internet of Things\n- Interconnection.\n\n\nPosisi kamu sekarang ada di: '+currentChatLocation+' ketik *Menu* untuk kembali ke menu utama');
-        }
-        
+
     }
 })
 
