@@ -29,7 +29,7 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
     ```
 - Clone repository and Install Library
     ```
-    git clone https://github.com/reynaldiarya/Whatsapp-Notification-Blesta.git
+    git clone https://github.com/reynaldiarya/WhatsApp-Notification-Blesta.git
     cd Whatsapp-Notification-Blesta
     npm install
     ```
