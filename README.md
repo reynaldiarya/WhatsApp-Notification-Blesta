@@ -30,7 +30,7 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
 - Clone repository and Install Library
     ```
     git clone https://github.com/reynaldiarya/WhatsApp-Notification-Blesta.git
-    cd Whatsapp-Notification-Blesta
+    cd WhatsApp-Notification-Blesta
     npm install
     ```
 - Konfigurasi API
@@ -62,9 +62,9 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
     invoice_comingTerminate = "Halo, *{firstName} {lastName}*"
     ```
 - Login Whatsapp
-    sebagai contoh, instalasi di path /var/www/Whatsapp-Notification-Blesta
+    sebagai contoh, instalasi di path /var/www/WhatsApp-Notification-Blesta
     ```
-    node /var/www/Whatsapp-Notification-Blesta/index.js
+    node /var/www/WhatsApp-Notification-Blesta/index.js
     ```
     - scan qr hingga muncul success pairing
     - exit program / CTRL + C
@@ -72,18 +72,18 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
 - Whatsapp BOT & API
     - edit cron
     ```
-    @reboot sleep 5 && node /var/www/Whatsapp-Notification-Blesta/index.js &
+    @reboot sleep 5 && node /var/www/WhatsApp-Notification-Blesta/index.js &
     ```
     - jalankan service ulang
     ```
-    node /var/www/Whatsapp-Notification-Blesta/index.js &
+    node /var/www/WhatsApp-Notification-Blesta/index.js &
     ```
 - Service Kirim Invoice Blesta Notifikasi (tiap hari, jam 8 pagi) dan notifikasi invoice paid (tiap 5menit)
     ```
-    */5 * * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_paid.py
-    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_unpaid.py
-    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_duedate.py
-    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_comingTerminate.py
+    */5 * * * * cd /var/www/WhatsApp-Notification-Blesta/blesta && python3 invoice_paid.py
+    0 8 * * * cd /var/www/WhatsApp-Notification-Blesta/blesta && python3 invoice_unpaid.py
+    0 8 * * * cd /var/www/WhatsApp-Notification-Blesta/blesta && python3 invoice_duedate.py
+    0 8 * * * cd /var/www/WhatsApp-Notification-Blesta/blesta && python3 invoice_comingTerminate.py
     ```
 # Endpoint
 - API Endpoint
