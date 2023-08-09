@@ -22,7 +22,7 @@ if responseinvoices.status_code == 200:
             time_difference = now - date_closed
             time_difference_minutes = time_difference.total_seconds() / 60
 
-            if 0 <= time_difference_minutes <= 5:
+            if 0 <= time_difference_minutes <= 7:
                 urlcontact = f"{config.url}/contacts/getAll.json"
                 paramscontact = {
                     "client_id": invoice.get('client_id')

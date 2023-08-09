@@ -5,20 +5,24 @@ import template_message
 
 urlinvoices = f"{config.url}/invoices/getList.json"
 paramsinvoices = {
-    "status": 'open'
+    "status": 'open',
+    "order_by[date_billed]": "DESC"
 }
 responseinvoices = requests.get(urlinvoices, params=paramsinvoices, auth=(config.user, config.key))
 if responseinvoices.status_code == 200:
     datainvoices = responseinvoices.json()
     responseinvoceslist = datainvoices.get('response', [])
 
-    today = datetime.datetime.now().date()
+    now = datetime.datetime.now()
 
     for invoice in responseinvoceslist:
         date_billed_str = invoice.get('date_billed')
         if date_billed_str:
-            date_billed = datetime.datetime.strptime(date_billed_str, "%Y-%m-%d %H:%M:%S").date()
-            if date_billed == today:
+            date_billed = datetime.datetime.strptime(date_billed_str, "%Y-%m-%d %H:%M:%S")
+            time_difference = now - date_billed
+            time_difference_minutes = time_difference.total_seconds() / 60
+
+            if 0 <= time_difference_minutes <= 7:
                 urlcontact = f"{config.url}/contacts/getAll.json"
                 paramscontact = {
                     "client_id": invoice.get('client_id')

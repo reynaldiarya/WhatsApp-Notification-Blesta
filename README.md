@@ -82,7 +82,7 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
 - Service Kirim Invoice Blesta Notifikasi (tiap hari, jam 8 pagi) dan notifikasi invoice paid (tiap 5menit)
     ```
     */5 * * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_paid.py
-    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_unpaid.py
+    */5 * * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_unpaid.py
     0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_duedate.py
     0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_comingTerminate.py
     ```
