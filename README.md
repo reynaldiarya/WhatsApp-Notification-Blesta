@@ -26,7 +26,6 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
 - Install Python3 PIP & dependency (Ubuntu)
     ```
     apt install python3-pip
-    pip install mysql-connector-python
     ```
 - Clone repository and Install Library
     ```
