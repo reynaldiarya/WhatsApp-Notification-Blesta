@@ -70,11 +70,11 @@ client.on('message', async message => {
     if (message.body.toLowerCase() === 'menu') {
         // Membalas Pesan
         currentChatLocation = 'menu';
-        message.reply('=== MENU UTAMA ===\n\nUntuk memilih menu, ketik angka yang tersedia dalam pilihan menu !1. Daftar Layanan Hexahost')
+        message.reply('=== MENU UTAMA ===\n\nUntuk memilih menu, ketik angka yang tersedia dalam pilihan menu !\n1. Daftar Layanan Hexahost')
     }
     if (currentChatLocation == 'menu') {
         if (message.body.toLocaleLowerCase() === '1'){
-            message.reply('Layanan yang kami berikan yakni:\n- Hosting\n- Domain\n- Pembuatan Website\n- Optimasi PageSpeed WordPress\n- Expired Domain.\n\n\nPosisi kamu sekarang ada di: '+currentChatLocation+' ketik *Menu* untuk kembali ke menu utama');
+            message.reply('Layanan yang kami berikan yakni:\n\n- Hosting\n- Domain\n- Pembuatan Website\n- Optimasi PageSpeed WordPress\n- Expired Domain.\n\n\nPosisi kamu sekarang ada di: '+currentChatLocation+' ketik *Menu* untuk kembali ke menu utama');
         }
 
     }
