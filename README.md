@@ -26,12 +26,11 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
 - Install Python3 PIP & dependency (Ubuntu)
     ```
     apt install python3-pip
-    pip install mysql-connector-python
     ```
 - Clone repository and Install Library
     ```
-    git clone https://github.com/reynaldiarya/Whatsapp-Notification-Blesta.git
-    cd Whatsapp-Notification-Blesta
+    git clone https://github.com/reynaldiarya/WhatsApp-Notification-Blesta.git
+    cd WhatsApp-Notification-Blesta
     npm install
     ```
 - Konfigurasi API
@@ -63,9 +62,9 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
     invoice_comingTerminate = "Halo, *{firstName} {lastName}*"
     ```
 - Login Whatsapp
-    sebagai contoh, instalasi di path /var/www/Whatsapp-Notification-Blesta
+    sebagai contoh, instalasi di path /var/www/WhatsApp-Notification-Blesta
     ```
-    node /var/www/Whatsapp-Notification-Blesta/index.js
+    node /var/www/WhatsApp-Notification-Blesta/index.js
     ```
     - scan qr hingga muncul success pairing
     - exit program / CTRL + C
@@ -73,11 +72,11 @@ Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
 - Whatsapp BOT & API
     - edit cron
     ```
-    @reboot sleep 5 && node /var/www/Whatsapp-Notification-Blesta/index.js &
+    @reboot sleep 5 && node /var/www/WhatsApp-Notification-Blesta/index.js &
     ```
     - jalankan service ulang
     ```
-    node /var/www/Whatsapp-Notification-Blesta/index.js &
+    node /var/www/WhatsApp-Notification-Blesta/index.js &
     ```
 - Service Kirim Invoice Blesta Notifikasi (tiap hari, jam 8 pagi) dan notifikasi invoice paid (tiap 5menit)
     ```
