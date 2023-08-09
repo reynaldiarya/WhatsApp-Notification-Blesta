@@ -1,24 +1,25 @@
 # Introduction
+Original: https://github.com/Intprism-Technology/Whatsapp-WHMCS
+
 ## Changelog
-- 30/03/2023 Update unpaid invoice from date to create date, so every invoice generate its will send to customer. important update !
-- 06/08/2023 Add new ticket & reply ticket notification to whatsapp client
+
 
 ## Features
 - [OK] API Kirim Pesan ke Nomor
 - [OK] Auto Response / BOT
-- [OK] WHMCS Billing Alert
+- [OK] Blesta Billing Alert
     - Invoice Terbit
     - Invoice Paid
     - Invoice DueDate
     - Last Notification 1day Before Terminate
 
 # Requirements
-- NodeJS V18
-- Python V3
+- NodeJS v18
+- Python v3
 - Pip Python
 
 # Install
-- Install NodeJS 
+- Install NodeJS
     ```
     https://nodejs.org/en/download/
     ```
@@ -29,25 +30,23 @@
     ```
 - Clone repository and Install Library
     ```
-    git clone git@github.com:Intprism-Technology/Whatsapp-WHMCS.git
-    cd Whatsapp-WHMCS
+    git clone https://github.com/reynaldiarya/Whatsapp-Notification-Blesta.git
+    cd Whatsapp-Notification-Blesta
     npm install
-    npm update
     ```
-- Konfigurasi DB MySQL
+- Konfigurasi API
     ```
-    nano whmcs/config.py
+    nano blesta/config.py
     ```
     edit baris berikut
     ```
-    host_db = ''
-    name_db = ''
-    user_db = ''
-    pass_db = ''
+    url = ''
+    user = ''
+    key = ''
     ```
-- Konfigurasi template pesan notifikasi WHMCS
+- Konfigurasi template pesan notifikasi Blesta
     ```
-    nano whmcs/template_message.py
+    nano blesta/template_message.py
     ```
     template variabel
     ```
@@ -57,20 +56,16 @@
     # Nomor Invoice: {invoiceNumber}
     # Due Date: {duedate}
     # Total Tagihan: {duetotal}
-    # Tiket ID: {ticketID}
-    # Tiket title: {ticketTitle}
 
     invoice_unpaid = "Halo, *{firstName} {lastName}*"
     invoice_paid = "Halo, *{firstName} {lastName}*"
     invoice_duedate = "Halo, *{firstName} {lastName}*"
     invoice_comingTerminate = "Halo, *{firstName} {lastName}*"
-    new_ticket = "Halo, *{firstName} {lastName}*
-    reply_ticket = "Halo, *{firstName} {lastName}*
     ```
 - Login Whatsapp
-    sebagai contoh, instalasi di path /var/www/Whatsapp-WHMCS
+    sebagai contoh, instalasi di path /var/www/Whatsapp-Notification-Blesta
     ```
-    /usr/local/bin/node /var/www/Whatsapp-WHMCS/index.js
+    node /var/www/Whatsapp-Notification-Blesta/index.js
     ```
     - scan qr hingga muncul success pairing
     - exit program / CTRL + C
@@ -78,19 +73,18 @@
 - Whatsapp BOT & API
     - edit cron
     ```
-    @reboot sleep 5 && /usr/local/bin/node /var/www/Whatsapp-WHMCS/index.js &
+    @reboot sleep 5 && node /var/www/Whatsapp-Notification-Blesta/index.js &
     ```
-    - jalankan service ulang 
+    - jalankan service ulang
     ```
-    /usr/local/bin/node /var/www/Whatsapp-WHMCS/index.js &
+    node /var/www/Whatsapp-Notification-Blesta/index.js &
     ```
-- Service Kirim Invoice WHMCS Notifikasi (tiap hari, jam 8 pagi) dan notifikasi invoice paid (tiap 5menit)
+- Service Kirim Invoice Blesta Notifikasi (tiap hari, jam 8 pagi) dan notifikasi invoice paid (tiap 5menit)
     ```
-    */5 * * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_paid.py
-    0 8 * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_unpaid.py
-    0 8 * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_duedate.py
-    0 8 * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 invoice_comingTerminate.py
-    */5 * * * * cd /var/www/Whatsapp-WHMCS/whmcs && /usr/bin/python3 ticket.py
+    */5 * * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_paid.py
+    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_unpaid.py
+    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_duedate.py
+    0 8 * * * cd /var/www/Whatsapp-Notification-Blesta/blesta && python3 invoice_comingTerminate.py
     ```
 # Endpoint
 - API Endpoint
@@ -104,19 +98,3 @@
     phone (required)
     message (required)
     ```
-# Request Update
-Warga Diskusiwebhosting bisa request langsung melalui thread ))
-
-    https://www.diskusiwebhosting.com/threads/whatsapp-api-dan-notifikasi-whmcs.38061/
-
-
-# Support Developer
-- - - - - - - - - - - - - - - -
-BCA : 3151176150
-
-BCA Digital: 001339859866
-
-Jago : 506512637291
-
-Paypal: info@intprism.com
-- - - - - - - - - - - - - - - -
