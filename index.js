@@ -1,6 +1,7 @@
 // Package yang di gunakan
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
+
 // express api
 const express = require('express');
 const app = express();
